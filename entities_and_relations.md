@@ -45,15 +45,15 @@
 システムを利用するユーザーの情報を保存。物品によっては部員の私物が管理対象となる(スリッパ等)ので、ユーザーの卒業日なども保存する必要がある。
 
 ### 属性
-| 名前              | データ型 | 制約             | 説明                     |
-| ----------------- | -------- | ---------------- | ------------------------ |
-| `user_id`         | TEXT     | PRIMARY KEY      | ユーザーのユニークID     |
-| `name`            | TEXT     | NOT NULL         | 名前                     |
-| `screen_name`    | TEXT     | UNIQUE, NOT NULL | ユーザーのハンドルネーム |
-| `is_admin`        | BOOLEAN  | DEFAULT FALSE    | 管理者フラグ             |
-| `is_member`       | BOOLEAN  | DEFAULT TRUE     | 在籍状況                 |
-| `graduation_date` | DATE     |                  | 卒業日                   |
-| `remarks`         | TEXT     |                  | 備考欄                   |
+| 名前              | データ型 | 制約                    | 説明                     |
+| ----------------- | -------- | ----------------------- | ------------------------ |
+| `user_id`         | TEXT     | PRIMARY KEY             | ユーザーのユニークID     |
+| `name`            | TEXT     | NOT NULL                | 名前                     |
+| `screen_name`     | TEXT     | UNIQUE, NOT NULL        | ユーザーのハンドルネーム |
+| `is_admin`        | BOOLEAN  | DEFAULT FALSE, NOT NULL | 管理者フラグ             |
+| `is_member`       | BOOLEAN  | DEFAULT TRUE, NOT NULL  | 在籍状況                 |
+| `graduation_date` | DATE     |                         | 卒業日                   |
+| `remarks`         | TEXT     |                         | 備考欄                   |
 
 
 ---
@@ -71,7 +71,7 @@
 | `cost`                | INT      | COST>=0              | 申請された購入費用                                                          |
 | `disposer_id`         | TEXT     | FOREIGN KEY          | 廃棄責任者のID（Userへの外部キー）                                          |
 | `status_id`           | TEXT     | FOREIGN KEY          | 購入申請状態ID（Statusへの外部キー、pending(保留)やapproved(承認済み)など） |
-| `request_date`       | DATE     | DEFAULT CURRENT_DATE | 申請作成日時                                                                |
+| `request_date`        | DATE     | DEFAULT CURRENT_DATE | 申請作成日時                                                                |
 | `product_url`         | TEXT     |                      | 購入希望商品のURL                                                           |
 | `remarks`             | TEXT     |                      | 備考欄                                                                      |
 
