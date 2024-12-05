@@ -5,17 +5,18 @@
 管理対象となる備品情報を保存。
 
 ### 属性
-| 名前              | データ型 | 制約                                 | 説明                                        |
-| ----------------- | -------- | ------------------------------------ | ------------------------------------------- |
-| `product_id`      | TEXT     | PRIMARY KEY                          | 製品のユニークID                            |
-| `name`            | TEXT     | NOT NULL                             | 製品名                                      |
-| `model_number`    | TEXT     |                                      | 型番                                        |
-| `owner_id`        | TEXT     | FOREIGN KEY                          | 所有者（Userへの外部キー）                  |
-| `cost`            | INT      | COST>=0                              | 製品の購入コスト                            |
-| `purchase_date`   | DATE     | NOT NULL                             | 導入日                                      |
-| `expiration_date` | DATE     | `expiration_date` >  `purchase_date` | 耐用期限                                    |
-| `is_remaining`    | BOOLEAN  | DEFAULT TRUE, NOT NULL               | 現存しているか(廃棄済みや失効済みならFALSE) |
-| `remarks`         | TEXT     |                                      | 備考欄                                      |
+| 名前                  | データ型 | 制約                                 | 説明                                                                |
+| --------------------- | -------- | ------------------------------------ | ------------------------------------------------------------------- |
+| `product_id`          | TEXT     | PRIMARY KEY                          | 製品のユニークID                                                    |
+| `name`                | TEXT     | NOT NULL                             | 製品名                                                              |
+| `model_number`        | TEXT     |                                      | 型番                                                                |
+| `owner_id`            | TEXT     | FOREIGN KEY                          | 所有者（Userへの外部キー）                                          |
+| `cost`                | INT      | COST>=0                              | 製品の購入コスト                                                    |
+| `purchase_date`       | DATE     | NOT NULL                             | 導入日                                                              |
+| `expiration_date`     | DATE     | `expiration_date` >  `purchase_date` | 耐用期限                                                            |
+| `is_remaining`        | BOOLEAN  | DEFAULT TRUE, NOT NULL               | 現存しているか(廃棄済みや失効済みならFALSE)                         |
+| `purchase_request_id` | TEXT     | FOREIGN KEY                          | 追加元の購入申請（PurchaseRequestへの外部キー、寄付等の場合はNULL） |
+| `remarks`             | TEXT     |                                      | 備考欄                                                              |
 
 ---
 ## 2. 分類 (Category)
