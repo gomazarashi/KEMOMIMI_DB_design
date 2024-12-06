@@ -1,25 +1,41 @@
 # エンティティ定義
 
-## 製品 (Product)
+## 物品 (Thing)
 
 ### 説明
 
-管理対象となる備品情報を保存。
+管理対象となる物品情報を保存。
 
 ### 属性
 
 | 名前                  | データ型 | 制約                                | 説明                                                                |
 | --------------------- | -------- | ----------------------------------- | ------------------------------------------------------------------- |
-| `product_id`          | TEXT     | PRIMARY KEY                         | 製品のユニークID                                                    |
-| `name`                | TEXT     | NOT NULL                            | 製品名                                                              |
-| `model_number`        | TEXT     |                                     | 型番                                                                |
+| `thing_id`            | TEXT     | PRIMARY KEY                         | 物品のユニークID                                                    |
+| `name`                | TEXT     | NOT NULL                            | 物品名(製品名と別なのは、PC愛称などを入れる想定)                    |
+| `product_id`          | TEXT     | FOREIGN KEY                         | 製品のユニークID                                                    |
 | `owner_id`            | TEXT     | FOREIGN KEY                         | 所有者（Userへの外部キー）                                          |
-| `cost`                | INT      | COST>=0                             | 製品の購入コスト                                                    |
+| `cost`                | INT      | COST>=0                             | 物品の購入コスト                                                    |
 | `purchase_date`       | DATE     | NOT NULL                            | 導入日                                                              |
 | `expiration_date`     | DATE     | `expiration_date` > `purchase_date` | 耐用期限                                                            |
 | `is_remaining`        | BOOLEAN  | DEFAULT TRUE, NOT NULL              | 現存しているか(廃棄済みや失効済みならFALSE)                         |
 | `purchase_request_id` | TEXT     | FOREIGN KEY                         | 追加元の購入申請（PurchaseRequestへの外部キー、寄付等の場合はNULL） |
 | `remarks`             | TEXT     |                                     | 備考欄                                                              |
+
+## 製品 (Product)
+
+### 説明
+
+製品に関する一般的な情報。物品と違い、管理対象でない (申請中の) 製品も扱えるよう属性を抽出した。
+
+### 属性
+
+| 名前           | データ型 | 制約        | 説明             |
+| -------------- | -------- | ----------- | ---------------- |
+| `product_id`   | TEXT     | PRIMARY KEY | 製品のユニークID |
+| `name`         | TEXT     | NOT NULL    | 製品名           |
+| `model_number` | TEXT     |             | 型番             |
+| `product_url`  | TEXT     |             | 商品のURL        |
+| `remarks`      | TEXT     |             | 備考欄           |
 
 ## 分類 (Category)
 
@@ -80,13 +96,11 @@
 | --------------------- | -------- | -------------------- | --------------------------------------------------------------------------- |
 | `purchase_request_id` | TEXT     | PRIMARY KEY          | 申請のユニークID                                                            |
 | `applicant_id`        | TEXT     | FOREIGN KEY          | 申請者のID（Userへの外部キー）                                              |
-| `product_name`        | TEXT     | NOT NULL             | 申請された製品名                                                            |
-| `model_number`        | TEXT     |                      | 型番                                                                        |
-| `cost`                | INT      | COST>=0              | 申請された購入費用                                                          |
+| `product_id`          | TEXT     | FOREIGN KEY          | 申請する製品のID                                                            |
+| `cost`                | INT      | COST>=0              | 申請時の想定費用                                                            |
 | `status_id`           | TEXT     | FOREIGN KEY          | 購入申請状態ID（Statusへの外部キー、pending(保留)やapproved(承認済み)など） |
 | `request_date`        | DATE     | DEFAULT CURRENT_DATE | 申請作成日                                                                  |
 | `approval_date`       | DATE     |                      | 承認日                                                                      |
-| `product_url`         | TEXT     |                      | 購入希望商品のURL                                                           |
 | `remarks`             | TEXT     |                      | 備考欄                                                                      |
 
 ## 購入申請の状態 (PurchaseRequestStatus)
