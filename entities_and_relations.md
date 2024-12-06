@@ -46,15 +46,16 @@
 システムを利用するユーザーの情報を保存。物品によっては部員の私物が管理対象となる(ボードゲーム、漫画等)ので、ユーザーの卒業日なども保存する必要がある。
 
 ### 属性
-| 名前              | データ型 | 制約                    | 説明                       |
-| ----------------- | -------- | ----------------------- | -------------------------- |
-| `user_id`         | TEXT     | PRIMARY KEY             | ユーザーのユニークID       |
-| `handle_name`     | TEXT     | NOT NULL                | ユーザーのハンドルネーム   |
-| `screen_name`     | TEXT     | UNIQUE, NOT NULL        | ユーザーのスクリーンネーム |
-| `is_admin`        | BOOLEAN  | DEFAULT FALSE, NOT NULL | 管理者フラグ               |
-| `is_member`       | BOOLEAN  | DEFAULT TRUE, NOT NULL  | 在籍状況                   |
-| `graduation_date` | DATE     |                         | 卒業日                     |
-| `remarks`         | TEXT     |                         | 備考欄                     |
+| 名前              | データ型 | 制約                    | 説明                             |
+| ----------------- | -------- | ----------------------- | -------------------------------- |
+| `user_id`         | TEXT     | PRIMARY KEY             | ユーザーのユニークID             |
+| `handle_name`     | TEXT     | NOT NULL                | ユーザーのハンドルネーム         |
+| `screen_name`     | TEXT     | UNIQUE, NOT NULL        | ユーザーのスクリーンネーム       |
+| `slack_id`        | TEXT     | UNIQUE                  | ユーザーのSlack ID(通知等に使用) |
+| `is_admin`        | BOOLEAN  | DEFAULT FALSE, NOT NULL | 管理者フラグ                     |
+| `is_member`       | BOOLEAN  | DEFAULT TRUE, NOT NULL  | 在籍状況                         |
+| `graduation_date` | DATE     |                         | 卒業日                           |
+| `remarks`         | TEXT     |                         | 備考欄                           |
 
 
 ---
