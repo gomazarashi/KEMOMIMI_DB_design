@@ -70,6 +70,7 @@
 | `purchase_request_id` | TEXT     | PRIMARY KEY          | 申請のユニークID                                                            |
 | `applicant_id`        | TEXT     | FOREIGN KEY          | 申請者のID（Userへの外部キー）                                              |
 | `product_name`        | TEXT     | NOT NULL             | 申請された製品名                                                            |
+| `model_number`        | TEXT     |                      | 型番                                                                        |
 | `cost`                | INT      | COST>=0              | 申請された購入費用                                                          |
 | `disposer_id`         | TEXT     | FOREIGN KEY          | 廃棄責任者のID（Userへの外部キー）                                          |
 | `status_id`           | TEXT     | FOREIGN KEY          | 購入申請状態ID（Statusへの外部キー、pending(保留)やapproved(承認済み)など） |
