@@ -72,8 +72,8 @@
 | `cost`                | INT      | COST>=0              | 申請された購入費用                                                          |
 | `disposer_id`         | TEXT     | FOREIGN KEY          | 廃棄責任者のID（Userへの外部キー）                                          |
 | `status_id`           | TEXT     | FOREIGN KEY          | 購入申請状態ID（Statusへの外部キー、pending(保留)やapproved(承認済み)など） |
-| `request_date`        | DATE     | DEFAULT CURRENT_DATE | 申請作成日時                                                                |
-| `approval_date`       | DATE     |                      | 承認日時                                                                    |
+| `request_date`        | DATE     | DEFAULT CURRENT_DATE | 申請作成日                                                                |
+| `approval_date`       | DATE     |                      | 承認日                                                                    |
 | `product_url`         | TEXT     |                      | 購入希望商品のURL                                                           |
 | `remarks`             | TEXT     |                      | 備考欄                                                                      |
 
