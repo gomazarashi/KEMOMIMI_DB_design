@@ -1,6 +1,6 @@
 # エンティティ定義
 
-## 1. 製品 (Product)
+## 製品 (Product)
 
 ### 説明
 
@@ -21,7 +21,7 @@
 | `purchase_request_id` | TEXT     | FOREIGN KEY                         | 追加元の購入申請（PurchaseRequestへの外部キー、寄付等の場合はNULL） |
 | `remarks`             | TEXT     |                                     | 備考欄                                                              |
 
-## 2. 分類 (Category)
+## 分類 (Category)
 
 ### 説明
 
@@ -35,7 +35,7 @@
 | `name`        | TEXT     | UNIQUE, NOT NULL | カテゴリ名           |
 | `remarks`     | TEXT     |                  | 備考欄               |
 
-## 3.製品-カテゴリ関係 (ProductCategory)
+## 製品-カテゴリ関係 (ProductCategory)
 
 ### 説明
 
@@ -49,7 +49,7 @@
 | `category_id` | TEXT                          | FOREIGN KEY | カテゴリのID（Categoryへの外部キー） |
 | PRIMARY KEY   | (`product_id`, `category_id`) |             |
 
-## 4. 部員 (User)
+## 部員 (User)
 
 ### 説明
 
@@ -68,7 +68,7 @@
 | `graduation_date` | DATE     |                         | 卒業日                           |
 | `remarks`         | TEXT     |                         | 備考欄                           |
 
-## 5. 購入申請 (PurchaseRequest)
+## 購入申請 (PurchaseRequest)
 
 ### 説明
 
@@ -89,7 +89,7 @@
 | `product_url`         | TEXT     |                      | 購入希望商品のURL                                                           |
 | `remarks`             | TEXT     |                      | 備考欄                                                                      |
 
-## 6. 購入申請の状態 (PurchaseRequestStatus)
+## 購入申請の状態 (PurchaseRequestStatus)
 
 ### 説明
 
