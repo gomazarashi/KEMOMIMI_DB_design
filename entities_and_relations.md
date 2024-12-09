@@ -21,6 +21,23 @@
 | `purchase_request_id` | TEXT     | FOREIGN KEY                         | 追加元の購入申請（PurchaseRequestへの外部キー、寄付等の場合はNULL） |
 | `remarks`             | TEXT     |                                     | 備考欄                                                              |
 
+## 私物(PrivateItem)
+
+### 説明
+
+スリッパやPCのアカウントなど、部員が個人的に管理している製品の情報を保存。
+
+### 属性
+
+| 名前           | データ型 | 制約                   | 説明                                        |
+| -------------- | -------- | ---------------------- | ------------------------------------------- |
+| `private_id`   | TEXT     | PRIMARY KEY            | 私物のユニークID                            |
+| `name`         | TEXT     | NOT NULL               | 製品名                                      |
+| `owner_id`     | TEXT     | FOREIGN KEY            | 所有者（Userへの外部キー）                  |
+| `model_number` | TEXT     |                        | 型番                                        |
+| `is_remaining` | BOOLEAN  | DEFAULT TRUE, NOT NULL | 現存しているか(廃棄済みや失効済みならFALSE) |
+| `remarks`      | TEXT     |                        | 備考欄                                      |
+
 ## 製品 (Product)
 
 ### 説明
