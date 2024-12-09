@@ -14,7 +14,7 @@
 | `name`                | TEXT     | NOT NULL                            | 物品名(製品名と別なのは、PC愛称などを入れる想定)                    |
 | `product_id`          | TEXT     | FOREIGN KEY                         | 製品のユニークID                                                    |
 | `owner_id`            | TEXT     | FOREIGN KEY                         | 所有者（Userへの外部キー）                                          |
-| `cost`                | INT      | COST>=0                             | 物品の購入コスト                                                    |
+| `cost`                | INT      | `cost`>=0                           | 物品の購入コスト                                                    |
 | `purchase_date`       | DATE     | NOT NULL                            | 導入日                                                              |
 | `expiration_date`     | DATE     | `expiration_date` > `purchase_date` | 耐用期限                                                            |
 | `is_remaining`        | BOOLEAN  | DEFAULT TRUE, NOT NULL              | 現存しているか(廃棄済みや失効済みならFALSE)                         |
