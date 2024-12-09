@@ -30,7 +30,7 @@
 
 | 名前                 | データ型 | 制約                   | 説明                                        |
 | -------------------- | -------- | ---------------------- | ------------------------------------------- |
-| `private_id`         | TEXT     | PRIMARY KEY            | 私物のユニークID                            |
+| `private_item_id`         | TEXT     | PRIMARY KEY            | 私物のユニークID                            |
 | `name`               | TEXT     | NOT NULL               | 製品名                                      |
 | `owner_id`           | TEXT     | FOREIGN KEY            | 所有者（Userへの外部キー）                  |
 | `post_grad_treat_id` | TEXT     | FOREIGN KEY            | 卒業後の処理（PostGradTreatへの外部キー）   |
