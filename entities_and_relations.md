@@ -1,19 +1,19 @@
 # エンティティ定義
 
-## 物品 (Thing)
+## 備品 (PublicItem)
 
 ### 説明
 
-管理対象となる物品情報を保存。
+管理対象となる備品(≠私物)の情報を保存。
 
 ### 属性
 
 | 名前                  | データ型 | 制約                                | 説明                                                                |
 | --------------------- | -------- | ----------------------------------- | ------------------------------------------------------------------- |
-| `thing_id`            | TEXT     | PRIMARY KEY                         | 物品のユニークID                                                    |
-| `name`                | TEXT     | NOT NULL                            | 物品名(製品名と別なのは、PC愛称などを入れる想定)                    |
+| `public_id`           | TEXT     | PRIMARY KEY                         | 備品のユニークID                                                    |
+| `name`                | TEXT     | NOT NULL                            | 備品名(製品名と別なのは、PC愛称などを入れる想定)                    |
 | `product_id`          | TEXT     | FOREIGN KEY                         | 製品のユニークID                                                    |
-| `cost`                | INT      | `cost`>=0                           | 物品の購入コスト                                                    |
+| `cost`                | INT      | `cost`>=0                           | 備品の購入コスト                                                    |
 | `purchase_date`       | DATE     | NOT NULL                            | 導入日                                                              |
 | `expiration_date`     | DATE     | `expiration_date` > `purchase_date` | 耐用期限                                                            |
 | `is_remaining`        | BOOLEAN  | DEFAULT TRUE, NOT NULL              | 現存しているか(廃棄済みや失効済みならFALSE)                         |
@@ -41,7 +41,7 @@
 
 ### 説明
 
-製品に関する一般的な情報。物品と違い、管理対象でない (申請中の) 製品も扱えるよう属性を抽出した。
+製品に関する一般的な情報。備品と違い、管理対象でない (申請中の) 製品も扱えるよう属性を抽出した。
 
 ### 属性
 
