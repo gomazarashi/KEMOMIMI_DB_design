@@ -44,9 +44,9 @@
 
 私物が所有者の卒業後にどうなるかを管理。`未定`となっている場合は卒業前にSlackでメンションする等の対応が必要。
 
-| 名前         | データ型 | 制約        | 説明                  |
-| ------------ | -------- | ----------- | --------------------- |
-| `treat_id`   | TEXT     | PRIMARY KEY | 処理のユニークID      |
+| 名前         | データ型 | 制約        | 説明                         |
+| ------------ | -------- | ----------- | ---------------------------- |
+| `treat_id`   | TEXT     | PRIMARY KEY | 処理のユニークID             |
 | `treat_name` | TEXT     | NOT NULL    | 処理名（未定や回収、寄付等） |
 
 ## 製品 (Product)
@@ -111,6 +111,22 @@
 | `is_member`       | BOOLEAN  | DEFAULT TRUE, NOT NULL  | 在籍状況                         |
 | `graduation_date` | DATE     |                         | 卒業日                           |
 | `remarks`         | TEXT     |                         | 備考欄                           |
+
+
+## メインユーザー - 備品関係 (MainUserPublicItem)
+
+### 説明
+
+「備品」と「メインユーザー」の多対多の関係を管理する中間テーブル。
+
+### 属性
+
+| 名前             | データ型                      | 制約        | 説明                                       |
+| ---------------- | ----------------------------- | ----------- | ------------------------------------------ |
+| `public_item_id` | TEXT                          | FOREIGN KEY | 備品のID (`PublicItem` への外部キー)       |
+| `user_id`        | TEXT                          | FOREIGN KEY | メインユーザーのID (`User` への外部キー)   |
+| PRIMARY KEY      | (`public_item_id`, `user_id`) |             | -                                          |
+
 
 ## 購入申請 (PurchaseRequest)
 
