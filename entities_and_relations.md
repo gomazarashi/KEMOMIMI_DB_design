@@ -1,31 +1,59 @@
 # エンティティ定義
 
-## 物品 (Thing)
+## 備品 (PublicItem)
 
 ### 説明
 
-管理対象となる物品情報を保存。
+管理対象となる備品(≠私物)の情報を保存。
 
 ### 属性
 
 | 名前                  | データ型 | 制約                                | 説明                                                                |
 | --------------------- | -------- | ----------------------------------- | ------------------------------------------------------------------- |
-| `thing_id`            | TEXT     | PRIMARY KEY                         | 物品のユニークID                                                    |
-| `name`                | TEXT     | NOT NULL                            | 物品名(製品名と別なのは、PC愛称などを入れる想定)                    |
+| `public_item_id`      | TEXT     | PRIMARY KEY                         | 備品のユニークID                                                    |
+| `name`                | TEXT     | NOT NULL                            | 備品名(製品名と別なのは、PC愛称などを入れる想定)                    |
 | `product_id`          | TEXT     | FOREIGN KEY                         | 製品のユニークID                                                    |
-| `owner_id`            | TEXT     | FOREIGN KEY                         | 所有者（Userへの外部キー）                                          |
-| `cost`                | INT      | COST>=0                             | 物品の購入コスト                                                    |
+| `cost`                | INT      | `cost`>=0                           | 備品の購入コスト                                                    |
 | `purchase_date`       | DATE     | NOT NULL                            | 導入日                                                              |
 | `expiration_date`     | DATE     | `expiration_date` > `purchase_date` | 耐用期限                                                            |
 | `is_remaining`        | BOOLEAN  | DEFAULT TRUE, NOT NULL              | 現存しているか(廃棄済みや失効済みならFALSE)                         |
 | `purchase_request_id` | TEXT     | FOREIGN KEY                         | 追加元の購入申請（PurchaseRequestへの外部キー、寄付等の場合はNULL） |
 | `remarks`             | TEXT     |                                     | 備考欄                                                              |
 
+## 私物(PrivateItem)
+
+### 説明
+
+スリッパやPCのアカウントなど、部員が個人的に管理している製品の情報を保存。
+
+### 属性
+
+| 名前                 | データ型 | 制約                   | 説明                                        |
+| -------------------- | -------- | ---------------------- | ------------------------------------------- |
+| `private_item_id`    | TEXT     | PRIMARY KEY            | 私物のユニークID                            |
+| `name`               | TEXT     | NOT NULL               | 製品名                                      |
+| `owner_id`           | TEXT     | FOREIGN KEY            | 所有者（Userへの外部キー）                  |
+| `post_grad_treat_id` | TEXT     | FOREIGN KEY            | 卒業後の処理（PostGradTreatへの外部キー）   |
+| `model_number`       | TEXT     |                        | 型番                                        |
+| `is_remaining`       | BOOLEAN  | DEFAULT TRUE, NOT NULL | 現存しているか(廃棄済みや失効済みならFALSE) |
+| `remarks`            | TEXT     |                        | 備考欄                                      |
+
+## 卒業後の私物の処理(PostGradTreat)
+
+### 説明
+
+私物が所有者の卒業後にどうなるかを管理。`未定`となっている場合は卒業前にSlackでメンションする等の対応が必要。
+
+| 名前         | データ型 | 制約        | 説明                         |
+| ------------ | -------- | ----------- | ---------------------------- |
+| `treat_id`   | TEXT     | PRIMARY KEY | 処理のユニークID             |
+| `treat_name` | TEXT     | NOT NULL    | 処理名（未定や回収、寄付等） |
+
 ## 製品 (Product)
 
 ### 説明
 
-製品に関する一般的な情報。物品と違い、管理対象でない (申請中の) 製品も扱えるよう属性を抽出した。
+製品に関する一般的な情報。備品と違い、管理対象でない (申請中の) 製品も扱えるよう属性を抽出した。
 
 ### 属性
 
@@ -69,7 +97,7 @@
 
 ### 説明
 
-システムを利用するユーザーの情報を保存。物品によっては部員の私物が管理対象となる(ボードゲーム、漫画等)ので、ユーザーの卒業日なども保存する必要がある。
+システムを利用するユーザーの情報を保存。製品によっては部員の私物が管理対象となる(ボードゲーム、漫画等)ので、ユーザーの卒業日なども保存する必要がある。
 
 ### 属性
 
@@ -83,6 +111,22 @@
 | `is_member`       | BOOLEAN  | DEFAULT TRUE, NOT NULL  | 在籍状況                         |
 | `graduation_date` | DATE     |                         | 卒業日                           |
 | `remarks`         | TEXT     |                         | 備考欄                           |
+
+
+## メインユーザー - 備品関係 (MainUserPublicItem)
+
+### 説明
+
+「備品」と「メインユーザー」の多対多の関係を管理する中間テーブル。
+
+### 属性
+
+| 名前             | データ型                      | 制約        | 説明                                       |
+| ---------------- | ----------------------------- | ----------- | ------------------------------------------ |
+| `public_item_id` | TEXT                          | FOREIGN KEY | 備品のID (`PublicItem` への外部キー)       |
+| `user_id`        | TEXT                          | FOREIGN KEY | メインユーザーのID (`User` への外部キー)   |
+| PRIMARY KEY      | (`public_item_id`, `user_id`) |             | -                                          |
+
 
 ## 購入申請 (PurchaseRequest)
 
