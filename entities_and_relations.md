@@ -48,7 +48,6 @@
 | ------------ | -------- | ----------- | --------------------- |
 | `treat_id`   | TEXT     | PRIMARY KEY | 処理のユニークID      |
 | `treat_name` | TEXT     | NOT NULL    | 処理名（未定や回収、寄付等） |
-| `remarks`    | TEXT     |             | 備考欄                |
 
 ## 製品 (Product)
 
