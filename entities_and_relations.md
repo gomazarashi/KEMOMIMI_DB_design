@@ -28,14 +28,27 @@
 
 ### 属性
 
-| 名前           | データ型 | 制約                   | 説明                                        |
-| -------------- | -------- | ---------------------- | ------------------------------------------- |
-| `private_id`   | TEXT     | PRIMARY KEY            | 私物のユニークID                            |
-| `name`         | TEXT     | NOT NULL               | 製品名                                      |
-| `owner_id`     | TEXT     | FOREIGN KEY            | 所有者（Userへの外部キー）                  |
-| `model_number` | TEXT     |                        | 型番                                        |
-| `is_remaining` | BOOLEAN  | DEFAULT TRUE, NOT NULL | 現存しているか(廃棄済みや失効済みならFALSE) |
-| `remarks`      | TEXT     |                        | 備考欄                                      |
+| 名前                 | データ型 | 制約                   | 説明                                        |
+| -------------------- | -------- | ---------------------- | ------------------------------------------- |
+| `private_id`         | TEXT     | PRIMARY KEY            | 私物のユニークID                            |
+| `name`               | TEXT     | NOT NULL               | 製品名                                      |
+| `owner_id`           | TEXT     | FOREIGN KEY            | 所有者（Userへの外部キー）                  |
+| `post_grad_treat_id` | TEXT     | FOREIGN KEY            | 卒業後の処理（PostGradTreatへの外部キー）   |
+| `model_number`       | TEXT     |                        | 型番                                        |
+| `is_remaining`       | BOOLEAN  | DEFAULT TRUE, NOT NULL | 現存しているか(廃棄済みや失効済みならFALSE) |
+| `remarks`            | TEXT     |                        | 備考欄                                      |
+
+## 卒業後の私物の処理(PostGradTreat)
+
+### 説明
+
+私物が所有者の卒業後にどうなるかを管理。`未定`となっている場合は卒業前にSlackでメンションする等の対応が必要。
+
+| 名前         | データ型 | 制約        | 説明                  |
+| ------------ | -------- | ----------- | --------------------- |
+| `treat_id`   | TEXT     | PRIMARY KEY | 処理のユニークID      |
+| `treat_name` | TEXT     | NOT NULL    | 処理名（NYD=未定 等） |
+| `remarks`    | TEXT     |             | 備考欄                |
 
 ## 製品 (Product)
 
